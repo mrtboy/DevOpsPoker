@@ -66,25 +66,47 @@ class PokerPlayerAPI(Resource):
     # @return a dictionary containing the following values
     #         bid  : a number between 0 and max_bid
     def __get_bid(self, data):
+        print("=" * 40)
         board = data['board']
         hand = data['hand']
+        print(hand)
         print(board)
-        print(data['pot'])
-        print(data['board'])
+        pot = data['pot']
+        print("POT is {}".format(pot))
+        print("-" * 40)
         first, second = hand
         f, b = first
         s, c = second
         print(f, s)
 
-        if f=='A' or f=="Q" or f=="K" or f=="J" or s=="A" or s=="Q" or s=="K" or s=="J":
-            min = data['min_bid']
-            blind = data['big_blind']
-            r = min + blind + 100
-            print(data['big_blind'])
-            print("GO BIG")
-            return r
+        if board == []:
+            print("Board is empty")
+        else:
+            first,second = board;
+            print("first Board Card id {}".format(first))
+
+        if f=='A' or f=="Q" or f=="K" or f=="J" or s=="A" or s=="Q" or s=="K" or s=="J" or s=="10" or s=="9" or f=="10" or f=="9":
+            if pot < 200:
+                print("-" * 40)
+                min = data['min_bid']
+                blind = data['big_blind']
+                r = min + blind + 100
+                print("GO BIG")
+                print("My Bid is {}".format(r))
+                return r
+            else:
+                print("-" * 40)
+                print("My Bid is {}".format(data['max_bid']))
+                return data['max_bid']
+        print("-" * 40)
         print("GO SMALL")
-        return data['min_bid']
+        
+        if pot < 50:
+            print("My Bid is {}".format(data['min_bid']))
+            return data['min_bid']
+        print("My Bid is {}".format(0))
+        return 0
+
 
         
     
