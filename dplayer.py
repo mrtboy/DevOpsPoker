@@ -66,8 +66,27 @@ class PokerPlayerAPI(Resource):
     # @return a dictionary containing the following values
     #         bid  : a number between 0 and max_bid
     def __get_bid(self, data):
-        
+        board = data['board']
+        hand = data['hand']
+        print(board)
+        print(data['pot'])
+        print(data['board'])
+        first, second = hand
+        f, b = first
+        s, c = second
+        print(f, s)
+
+        if f=='A' or f=="Q" or f=="K" or f=="J" or s=="A" or s=="Q" or s=="K" or s=="J":
+            min = data['min_bid']
+            blind = data['big_blind']
+            r = min + blind + 100
+            print(data['big_blind'])
+            print("GO BIG")
+            return r
+        print("GO SMALL")
         return data['min_bid']
+
+        
     
     # -------------------------------------------------------------- do not change behind this line
     # dispatch incoming get commands

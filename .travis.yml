@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.6"
+  - "3.6-dev"  # 3.6 development branch
+cache: pip
+# command to install dependencies
+install:
+  pip install -r requirements.txt
+  pip install flask
+  pip install flask_restful
+  pip install requests
+# command to run tests
+script:
+  python dplayer.py
