@@ -79,30 +79,33 @@ class PokerPlayerAPI(Resource):
         s, c = second
         print(f, s)
 
+        print(">" * 40)
         if board == []:
             print("Board is empty")
         else:
             first,second = board;
             print("first Board Card id {}".format(first))
+        print("<" * 40)
 
         if f=='A' or f=="Q" or f=="K" or f=="J" or s=="A" or s=="Q" or s=="K" or s=="J" or s=="10" or s=="9" or f=="10" or f=="9":
             if pot < 200:
-                print("-" * 40)
+                print("+" * 40)
                 min = data['min_bid']
                 blind = data['big_blind']
                 r = min + blind + 100
                 print("GO BIG")
                 print("My Bid is {}".format(r))
-                return r
+                return pot
             else:
-                print("-" * 40)
+                print("^" * 40)
                 print("My Bid is {}".format(data['max_bid']))
                 return data['max_bid']
-        print("-" * 40)
+        print("+" * 40)
         print("GO SMALL")
         
         if pot < 50:
             print("My Bid is {}".format(data['min_bid']))
+            print("^" * 40)
             return data['min_bid']
         print("My Bid is {}".format(0))
         return 0
